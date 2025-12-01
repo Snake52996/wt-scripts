@@ -1,31 +1,8 @@
 // inject used css styles into the page, returning the CSS element
+import stylesheet from "./style.css" with {type: "text"};
 export function inject_styles() {
   const css = document.createElement("style");
-  css.textContent = `.tracked {
-  filter: blur(5px);
-  transition-duration: 0.4s;
-}
-.tracked:hover {
-  filter: none;
-}
-@keyframes highlight {
-  0% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.2);
-  }
-  100% {
-    filter: brightness(1);
-  }
-}
-.watching {
-  animation: highlight 1s linear infinite;
-}
-.watching:hover {
-  animation: unset;
-}`;
-
+  css.textContent = stylesheet;
   document.head.appendChild(css);
   return css;
 }
@@ -71,7 +48,7 @@ export async function split_data(data) {
     }))
   );
 
-  const split_a = new Set(
+  const tracked = new Set(
     reduced_data
       .filter(
         ({ condition }) =>
@@ -80,7 +57,7 @@ export async function split_data(data) {
       )
       .map(({ result }) => result)
   );
-  const split_b = new Set(
+  const watched = new Set(
     reduced_data
       .filter(
         ({ condition }) =>
@@ -89,5 +66,5 @@ export async function split_data(data) {
       )
       .map(({ result }) => result)
   );
-  return [split_a, split_b];
+  return [tracked, watched];
 }

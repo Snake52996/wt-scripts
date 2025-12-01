@@ -1,0 +1,1 @@
+.tracked{filter:blur(5px);transition-duration:.4s}.tracked:hover{filter:none}@keyframes highlight{0%{filter:brightness(1)}50%{filter:brightness(1.2)}to{filter:brightness(1)}}.watching{animation:highlight 1s linear infinite}.watching:hover{animation:unset}
